@@ -1,2 +1,5 @@
-PasswordManager/bin
-PasswordManager/obj
+PasswordManager/bin/
+PasswordManager/obj/
+bin
+obj
+packages
