@@ -26,9 +26,9 @@ namespace PasswordManager.DB
 
         protected internal void CreateDatabaseAndTables()
         {
-            string cmd = "CREATE TABLE IF NOT EXISTS users (id INTEGER NOT NULL AUTOINCREMENT, username VARCHAR NOT NULL, " +
+            string cmd = "CREATE TABLE IF NOT EXISTS users (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, username VARCHAR NOT NULL, " +
                 "password TEXT NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)";
-            string cmd2 = "CREATE TABLE IF NOT EXISTS manager (id INTEGER NOT NULL AUTOINCREMENT, user_id INTEGER NOT NULL " +
+            string cmd2 = "CREATE TABLE IF NOT EXISTS manager (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL " +
                 "password TEXT NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)";
             if (File.Exists("manager.sqlite"))
             {
@@ -51,7 +51,7 @@ namespace PasswordManager.DB
             {
                 conn.Open();
                 SQLiteCommand cmd = new SQLiteCommand(query, conn);
-                cmd.ExecuteNonQueryAsync();
+                cmd.ExecuteNonQuery();
 
                 conn.Close();
 
@@ -65,7 +65,7 @@ namespace PasswordManager.DB
 
         protected internal bool CreateMasterDatabase()
         {
-            string cmd = "CREATE TABLE IF NOT EXISTS master_table (id INTEGER NOT NULL AUTOINCREMENT, password TEXT NOT NULL, " +
+            string cmd = "CREATE TABLE IF NOT EXISTS master_table (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, password TEXT NOT NULL, " +
                "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)";
         
             if (File.Exists("master.sqlite"))
@@ -93,7 +93,7 @@ namespace PasswordManager.DB
 
         public SQLiteConnection StandardConn()
         {
-            return conn;
+            return conn1;
         }
 
         
