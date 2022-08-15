@@ -60,7 +60,7 @@ namespace PasswordManager.DB
             {
                 MessageBox.Show(e.Message);
             }
-           
+            
         }
 
         protected internal bool CreateMasterDatabase()
