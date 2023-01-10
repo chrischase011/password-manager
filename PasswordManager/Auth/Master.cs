@@ -9,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// For Registry
+using Microsoft.Win32;
+using PasswordManager.DB;
 
 namespace PasswordManager.Auth
 {
@@ -19,6 +22,8 @@ namespace PasswordManager.Auth
             InitializeComponent();
 
             GenerateMasterPassword();
+            Database db = new Database();
+            db.__init__();
         }
 
       private void GenerateMasterPassword(int _n = 30)
@@ -74,8 +79,40 @@ namespace PasswordManager.Auth
                 {
                     MessageBox.Show("Unexpected error occurred on creating database");
                 }
-            }
+            }          
+        }
+
+        private void btnMasterSubmit_Click(object sender, EventArgs e)
+        {
+            var _txtMaster = txtMaster.Text;
+            var _txtConfirm = txtConfirm.Text;
+            var _txtMasterLen = txtMaster.TextLength;
+            var _txtConfirmLen = txtConfirm.TextLength;
+            int flag = 0;
+
+            if(_txtMasterLen < 30 || _txtConfirmLen < 30)
+                MessageBox.Show("Master Password length must greater than 39 characters", "Error", MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
             
+            else if(_txtConfirm != _txtMaster)
+                MessageBox.Show("Master Password do not match", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            else
+            {
+                saveToRegistry(_txtMaster);
+            }
+        }
+
+
+        private void saveToRegistry(string mp)
+        {
+            string keyName = @"SOFTWARE\BrightChase\PasswordManager";
+            string valueName = "mp";
+            string valueData = mp;
+
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(keyName);
+            key.SetValue(valueName, valueData);
+            key.Close();
         }
     }
 }

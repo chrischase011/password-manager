@@ -27,8 +27,8 @@ namespace PasswordManager.DB
         protected internal void CreateDatabaseAndTables()
         {
             string cmd = "CREATE TABLE IF NOT EXISTS users (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, username VARCHAR NOT NULL, " +
-                "password TEXT NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)";
-            string cmd2 = "CREATE TABLE IF NOT EXISTS manager (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL " +
+                "password TEXT NOT NULL, hasSetMP INTEGER NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)";
+            string cmd2 = "CREATE TABLE IF NOT EXISTS manager (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL, " +
                 "password TEXT NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)";
             if (File.Exists("manager.sqlite"))
             {
@@ -95,6 +95,42 @@ namespace PasswordManager.DB
         {
             return conn1;
         }
+
+        /*
+         * 
+         * Database Transaction
+         * 
+         */
+
+        /*** SELECT ***/
+        public void SelectAllWhere(Dictionary<string, string> data, string table, string boolean)
+        {
+            try
+            {
+                string tablesAndData = "";
+                int count = data.Count;
+                foreach(KeyValuePair<string, string> kvp in data)
+                {
+                    tablesAndData += String.Format("{0} = {1}", kvp.Key, kvp.Value);
+                    if (count-- != 1) tablesAndData += boolean + " ";
+                }
+
+                //MessageBox.Show("Count: "+count+"\nData: "+tablesAndData);
+
+                SQLiteConnection conn = this.StandardConn();
+                SQLiteCommand cmd = new SQLiteCommand(String.Format("SELECT * FROM {0} WHERE {1}", table, tablesAndData), conn);
+
+                SQLiteDataReader rd = cmd.ExecuteReader();
+
+                while (rd.Read()) { }
+            }
+            catch(Exception e )
+            {
+                MessageBox.Show(e.Message); 
+            }
+        }
+
+      
 
         
     }

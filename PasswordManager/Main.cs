@@ -23,5 +23,10 @@ namespace PasswordManager
 
             MessageBox.Show("Created by: Christopher Robin Chase\n\nVersion: " + version, "About the Software", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

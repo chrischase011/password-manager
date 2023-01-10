@@ -33,7 +33,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtConfirm = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnMasterSubmit = new System.Windows.Forms.Button();
             this.checkShow = new System.Windows.Forms.CheckBox();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
@@ -92,17 +92,18 @@
             this.txtConfirm.TabStop = false;
             this.txtConfirm.UseSystemPasswordChar = true;
             // 
-            // button1
+            // btnMasterSubmit
             // 
-            this.button1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.button1.Font = new System.Drawing.Font("Showcard Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(223, 312);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(247, 51);
-            this.button1.TabIndex = 8;
-            this.button1.TabStop = false;
-            this.button1.Text = "Submit";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnMasterSubmit.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnMasterSubmit.Font = new System.Drawing.Font("Showcard Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnMasterSubmit.Location = new System.Drawing.Point(223, 312);
+            this.btnMasterSubmit.Name = "btnMasterSubmit";
+            this.btnMasterSubmit.Size = new System.Drawing.Size(247, 51);
+            this.btnMasterSubmit.TabIndex = 8;
+            this.btnMasterSubmit.TabStop = false;
+            this.btnMasterSubmit.Text = "Submit";
+            this.btnMasterSubmit.UseVisualStyleBackColor = false;
+            this.btnMasterSubmit.Click += new System.EventHandler(this.btnMasterSubmit_Click);
             // 
             // checkShow
             // 
@@ -148,7 +149,7 @@
             this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.checkShow);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnMasterSubmit);
             this.Controls.Add(this.txtConfirm);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -171,7 +172,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtConfirm;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnMasterSubmit;
         private System.Windows.Forms.CheckBox checkShow;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.Button btnCopy;
